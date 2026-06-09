@@ -14,11 +14,13 @@ blueprint:
           integration: bb_store_scaper
           domain: sensor
     notify_target:
-      name: Notification target
+      name: Notification service
       description: >
-        Select the device or service to notify.
+        Full notify service name, e.g. notify.mobile_app_my_phone
+      default: notify.notify
       selector:
-        notify:
+        device:
+          integration: mobile_app
     notification_title:
       name: Notification title
       default: "Back in stock!"
