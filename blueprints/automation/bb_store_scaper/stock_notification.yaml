@@ -14,13 +14,12 @@ blueprint:
           integration: bb_store_scaper
           domain: sensor
     notify_target:
-      name: Notification service
+      name: Notification device
       description: >
-        The part after "notify." — e.g. enter "mobile_app_my_phone" for
-        notify.mobile_app_my_phone.
+        Select the device to notify.
       selector:
-        text:
-          type: text
+        device:
+          integration: mobile_app
     notification_title:
       name: Notification title
       default: "Back in stock!"
@@ -43,7 +42,8 @@ trigger:
     to: "InStock"
 
 action:
-  - service: "notify.{{ notify_target }}"
-    data:
-      title: !input notification_title
-      message: !input notification_message
+  - domain: notify
+    device_id: !input notify_target
+    type: notify
+    title: !input notification_title
+    message: !input notification_message
