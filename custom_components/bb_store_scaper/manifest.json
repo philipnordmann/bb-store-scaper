@@ -1,0 +1,10 @@
+{
+  "domain": "bb_store_scaper",
+  "name": "Store Stock",
+  "version": "1.0.0",
+  "documentation": "",
+  "codeowners": [],
+  "requirements": [],
+  "iot_class": "cloud_polling",
+  "config_flow": true
+}

@@ -1,0 +1,22 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add product",
+        "data": {
+          "url": "Product URL",
+          "name": "Display name (optional)"
+        },
+        "description": "Enter the full product URL including the ?id= parameter"
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach the store. Check your internet connection.",
+      "invalid_url": "The URL could not be parsed. Make sure it includes the ?id= parameter.",
+      "no_variants": "No stock variants found for this product URL."
+    },
+    "abort": {
+      "already_configured": "This product is already configured."
+    }
+  }
+}

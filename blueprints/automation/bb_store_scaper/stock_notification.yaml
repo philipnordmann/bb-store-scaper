@@ -1,0 +1,49 @@
+blueprint:
+  name: Store — Stock alert notification
+  description: >
+    Send a notification whenever a tracked product variant comes back
+    in stock. Select any sensor created by the Store Stock integration.
+  domain: automation
+  input:
+    stock_sensor:
+      name: Stock sensor
+      description: >
+        Pick a variant sensor from the Store Stock integration.
+      selector:
+        entity:
+          integration: bb_store_scaper
+          domain: sensor
+    notify_target:
+      name: Notification service
+      description: >
+        The part after "notify." — e.g. enter "mobile_app_my_phone" for
+        notify.mobile_app_my_phone.
+      selector:
+        text:
+          type: text
+    notification_title:
+      name: Notification title
+      default: "Back in stock!"
+      selector:
+        text:
+          type: text
+    notification_message:
+      name: Notification message
+      description: >
+        Supports templates. Use {{ trigger.to_state.name }} for the variant name.
+      default: "{{ trigger.to_state.name }} is now in stock."
+      selector:
+        text:
+          type: text
+          multiline: true
+
+trigger:
+  - platform: state
+    entity_id: !input stock_sensor
+    to: "InStock"
+
+action:
+  - service: "notify.{{ notify_target }}"
+    data:
+      title: !input notification_title
+      message: !input notification_message
